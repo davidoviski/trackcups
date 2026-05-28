@@ -1,0 +1,7 @@
+node_modules/
+.idea/
+package.json
+package-lock.json
+compress.mjs
+fix_vtora.mjs
+.claude/settings.local.json
