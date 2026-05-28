@@ -885,8 +885,7 @@
     <span>TrackCups</span>
   </div>
   <div class="nav-actions">
-    <button class="nav-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">☀️</button>
-    <button class="nav-btn" id="cartBtn" title="Shopping cart" aria-label="Open cart">
+<button class="nav-btn" id="cartBtn" title="Shopping cart" aria-label="Open cart">
       🛒
       <span class="cart-badge" id="cartBadge">0</span>
     </button>
@@ -1191,7 +1190,6 @@
   const checkoutBtn = document.getElementById('checkoutBtn');
   const submitBtn   = document.getElementById('submitBtn');
   const toast       = document.getElementById('toast');
-  const themeBtn    = document.getElementById('themeBtn');
 
   // ---- Toast ----
   let toastTimer;
@@ -1410,17 +1408,6 @@
     document.querySelector('input[name="payment"][value="crypto"]').checked = true;
   }
 
-  // ---- Theme Toggle ----
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  let isDark = prefersDark;
-  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  themeBtn.textContent = isDark ? '☀️' : '🌙';
-
-  themeBtn.addEventListener('click', () => {
-    isDark = !isDark;
-    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    themeBtn.textContent = isDark ? '☀️' : '🌙';
-  });
 
   // ---- Shop Button ----
   document.getElementById('shopBtn').addEventListener('click', () => {
