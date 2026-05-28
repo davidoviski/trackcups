@@ -1061,9 +1061,9 @@
           <img src="trackcups%20shop/440i.jpg" alt="BMW 440i F32 Stage 2+" loading="lazy" style="object-position: center 58%;">
         </div>
         <div class="cup-info">
-          <div class="cup-spec-line">B58B30 · Stage 2+ Downpipe · Hybrid Turbo · ZF 8HP XHP Stage 3 · Drexler LSD · KW V3</div>
+          <div class="cup-spec-line">B58B30 Stage 2+ · Downpipe · Single Hybrid Turbo · ZF 8HP XHP Stage 3 · Drexler LSD · KW V3 · 500HP</div>
           <h3 class="cup-name">BMW 440i — F32 Stage 2+</h3>
-          <p class="cup-desc">The BMW 440i F32 has become one of the most respected modern BMW performance platforms thanks to the legendary B58B30 turbocharged inline-six. Known for its closed-deck construction, massive tuning potential, and exceptional reliability under high power, the B58 is widely considered the modern successor to Toyota's legendary 2JZ — a reputation further reinforced after Toyota selected the same engine platform for the latest generation Supra. Equipped with a Stage 2+ Downpipe and Hybrid Turbo setup, ZF-8HP XHP Stage 3 transmission, Drexler LSD differential, upgraded cooling, KW Variant 3 suspension and F82 brakes, this configuration delivers over 500 horsepower with explosive mid-range torque and extremely fast gear changes. The result is a serious M4 Killer setup, capable of outperforming standard modern M cars both on the street and on track.</p>
+          <p class="cup-desc">The BMW 440i has become one of the most respected modern BMW performance platforms thanks to the legendary B58B30 single turbocharged inline-six. Known for its closed-deck construction, massive tuning potential, and exceptional reliability under high power, the B58 is widely considered the modern successor to Toyota's legendary 2JZ — a reputation further reinforced after Toyota selected the same engine platform for the latest generation Supra. This chassis is tuned with a Stage 2+ Downpipe and Hybrid Turbo setup, ZF-8HP XHP Stage 3 transmission, Drexler LSD differential, upgraded cooling, KW V3 suspension and F82 M4 brakes. This configuration delivers over 500 horsepower with explosive mid-range torque and extremely fast gear changes. The result is a serious M4 Killer setup, capable of outperforming standard modern M cars both on the street and on track.</p>
           <div class="cup-footer">
             <div class="cup-price">€39.99</div>
             <div class="cup-actions">
@@ -1116,7 +1116,7 @@
       <!-- BMW M3 GTS E92 -->
       <div class="cup-item" data-id="m3gts" data-name="BMW M3 GTS — E92 Edition" data-price="75">
         <div class="cup-image-wrap">
-          <img src="trackcups%20shop/E9222.JPG" alt="BMW M3 GTS E92 Edition" loading="lazy" style="object-position: center 52%;">
+          <img src="trackcups%20shop/E92%20(2).jpg" alt="BMW M3 GTS E92 Edition" loading="lazy" style="object-position: center 50%;">
         </div>
         <div class="cup-info">
           <div class="cup-spec-line">S65B44 V8 · DCT · 450 HP</div>
@@ -1136,7 +1136,7 @@
       <div class="cup-item" data-id="max" data-name="Champion Edition — MAX RPM" data-price="90">
         <div class="cup-image-wrap">
           <div class="cup-badge">Limited Quantity</div>
-          <img src="trackcups%20shop/max v.jpg" alt="Champion Edition MAX RPM" loading="lazy" style="object-position: center 45%;">
+          <img src="trackcups%20shop/maxv2.png" alt="Champion Edition MAX RPM" loading="lazy" style="object-position: center 81%;">
         </div>
         <div class="cup-info">
           <div class="cup-spec-line">RB19 · 1.6L V6 Hybrid · 4× World Champion</div>
@@ -1158,7 +1158,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 TrackCups. Premium espresso for automotive enthusiasts.</p>
+  <p>© 2026 TRACKCUPS. Premium cups for automotive enthusiasts.</p>
 </footer>
 
 <!-- OVERLAY -->
@@ -1200,6 +1200,9 @@
       <div class="order-summary-total">
         <span>Total</span>
         <span id="summaryTotal">€0.00</span>
+      </div>
+      <div style="margin-top:0.75rem; padding:0.65rem 0.875rem; background:rgba(0,184,224,0.08); border:1px solid rgba(0,184,224,0.2); border-radius:0.6rem; font-size:12.5px; color:var(--color-text-muted); line-height:1.5;">
+        ☕ Each edition includes <strong style="color:#fff;">2 cups + 2 saucers</strong>
       </div>
     </div>
 
@@ -1300,15 +1303,15 @@
 <div class="toast" id="toast" role="alert"></div>
 
 <script>
-  const ORDER_ENDPOINT = 'https://formspree.io/f/xkoezqap';
+  const ORDER_ENDPOINT = 'https://formspree.io/f/xjgzlonp';
 
   // ---- Data ----
   const products = {
-    m3csl: { id: 'm3csl', name: 'BMW M3 CSL — E46 Edition',         price: 39.99, img: 'caski/M3E46.jpg' },
-    m3gts: { id: 'm3gts', name: 'BMW M3 GTS — E92 Edition',         price: 39.99, img: 'caski/E92.jpg'   },
-    m4gts: { id: 'm4gts', name: 'BMW M4 GTS — F82 Edition',         price: 39.99, img: 'caski/M4F82.jpg' },
-    '440i':{ id: '440i',  name: 'BMW 440i — F32 Stage 2+',          price: 39.99, img: 'caski/M440I.jpg' },
-    max:   { id: 'max',   name: 'Max Verstappen — Champion Edition', price: 34.99, img: 'caski/MAX.jpg'   }
+    m3csl: { id: 'm3csl', name: 'BMW M3 CSL — E46 Edition',  price: 39.99, img: 'trackcups%20shop/E46.png'   },
+    m3gts: { id: 'm3gts', name: 'BMW M3 GTS — E92 Edition',  price: 39.99, img: 'trackcups%20shop/E92%20(2).jpg' },
+    m4gts: { id: 'm4gts', name: 'BMW M4 GTS — F82 Edition',  price: 39.99, img: 'trackcups%20shop/m4.jpg'    },
+    '440i':{ id: '440i',  name: 'BMW 440i — F32 Stage 2+',   price: 39.99, img: 'trackcups%20shop/440i.jpg'  },
+    max:   { id: 'max',   name: 'Champion Edition — MAX RPM', price: 34.99, img: 'trackcups%20shop/maxv2.png' }
   };
 
   let cart = [];
