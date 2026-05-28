@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0" />
+  <title>TrackCups - BMW Inspired Espresso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #0e0e0e;
+      --color-surface: #181818;
+      --color-surface-light: #222222;
+      --color-text: #f0f0f0;
+      --color-text-muted: #999999;
+      --color-primary: #00b8e0;
+      --color-primary-dark: #0095b8;
+      --color-gold: #c9a227;
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-input-bg: #111111;
+      --color-navbar: rgba(14, 14, 14, 0.96);
+      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --radius-sm: 0.5rem;
+      --radius-md: 0.875rem;
+      --radius-lg: 1.25rem;
+      --radius-xl: 1.75rem;
+      --shadow-card: 0 4px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.3);
+      --shadow-card-hover: 0 8px 40px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4);
+      --transition: all 220ms ease;
+    }
+
+    [data-theme="light"] {
+      --color-bg: #f0f0f0;
+      --color-surface: #ffffff;
+      --color-surface-light: #e8e8e8;
+      --color-text: #111111;
+      --color-text-muted: #666666;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-input-bg: #f5f5f5;
+      --color-navbar: rgba(240, 240, 240, 0.96);
+      --shadow-card: 0 4px 24px rgba(0,0,0,0.1), 0 1px 4px rgba(0,0,0,0.06);
+      --shadow-card-hover: 0 8px 40px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; color: inherit; }
+    img { display: block; max-width: 100%; height: auto; }
+    input, select, textarea { font-family: inherit; color: inherit; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.25rem;
+      height: 64px;
+      background: var(--color-navbar);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-gold));
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 15px;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+    .nav-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.05);
+      transition: var(--transition);
+      font-size: 18px;
+    }
+
+    [data-theme="light"] .nav-btn { background: rgba(0,0,0,0.05); }
+
+    .nav-btn:active { transform: scale(0.93); }
+
+    .cart-badge {
+      position: absolute;
+      top: -4px; right: -4px;
+      background: var(--color-primary);
+      color: #000;
+      width: 19px; height: 19px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    /* ── LAYOUT ── */
+    main { margin-top: 64px; }
+
+    .page-wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .page-wrap { padding: 0 1.5rem; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 2.5rem 0 2rem;
+    }
+
+    .hero-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      align-items: center;
+    }
+
+    @media (min-width: 640px) {
+      .hero-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        padding: 0 1.5rem;
+      }
+      .hero-image { order: 2; }
+      .hero-text  { order: 1; }
+    }
+
+    .hero-image {
+      order: 1;
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .hero-text { order: 2; }
+
+    .hero-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-primary);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(24px, 5.5vw, 38px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.875rem;
+    }
+
+    .hero-text p {
+      font-size: 14px;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.65;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 13px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      -webkit-user-select: none;
+      user-select: none;
+      min-height: 46px;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #000;
+      box-shadow: 0 0 0 0 rgba(0,184,224,0);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-dark);
+      box-shadow: 0 4px 16px rgba(0,184,224,0.3);
+    }
+
+    .btn-primary:active { transform: scale(0.97); }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: var(--color-surface-light);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.2); }
+    .btn-secondary:active { transform: scale(0.97); }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 1rem 0 3rem;
+    }
+
+    .section-header {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1rem 1.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .section-header { padding: 0 1.5rem 2rem; }
+    }
+
+    .section-title {
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: var(--color-text-muted);
+      margin-top: 0.35rem;
+    }
+
+    /* ── CUPS LIST ── */
+    .cups-list {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .cups-list { padding: 0 1.5rem; gap: 2rem; }
+    }
+
+    /* ── CUP CARD ── */
+    .cup-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-card);
+      transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+      opacity: 0;
+      animation: fadeSlideUp 0.55s cubic-bezier(.22,.68,0,1.2) forwards;
+    }
+
+    .cup-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(0,184,224,0.25);
+    }
+
+    .cup-item:nth-child(1) { animation-delay: 0.05s; }
+    .cup-item:nth-child(2) { animation-delay: 0.13s; }
+    .cup-item:nth-child(3) { animation-delay: 0.21s; }
+    .cup-item:nth-child(4) { animation-delay: 0.29s; }
+    .cup-item:nth-child(5) { animation-delay: 0.37s; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .cup-image-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #0a0a0a;
+      overflow: hidden;
+    }
+
+    .cup-image-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 400ms ease;
+    }
+
+    .cup-item:hover .cup-image-wrap img {
+      transform: scale(1.03);
+    }
+
+    /* shimmer sweep on load */
+    @keyframes shimmer {
+      0%   { background-position: -700px 0; }
+      100% { background-position: 700px 0; }
+    }
+
+    .cup-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
+      background-size: 700px 100%;
+      animation: shimmer 2s ease infinite;
+      pointer-events: none;
+    }
+
+    .cup-badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      background: rgba(0,0,0,0.55);
+      color: var(--color-gold);
+      border: 1px solid rgba(201,162,39,0.35);
+      padding: 0.3rem 0.875rem;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      backdrop-filter: blur(6px);
+    }
+
+    .cup-info {
+      padding: 1.375rem 1.375rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 480px) {
+      .cup-info { padding: 1.5rem 1.625rem 1.75rem; }
+    }
+
+    .cup-spec-line {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--color-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .cup-name {
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+    }
+
+    .cup-desc {
+      font-size: 13.5px;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .cup-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .cup-price {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--color-gold);
+      letter-spacing: -0.03em;
+      flex-shrink: 0;
+    }
+
+    .cup-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .cup-actions .btn {
+      font-size: 13px;
+      padding: 11px 18px;
+      min-height: 44px;
+    }
+
+    /* ── CART DRAWER ── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease;
+      z-index: 999;
+    }
+
+    .overlay.active { opacity: 1; pointer-events: auto; }
+
+    .drawer {
+      position: fixed;
+      top: 0; right: 0;
+      width: 100%;
+      height: 100dvh;
+      background: var(--color-surface);
+      transform: translateX(100%);
+      transition: transform 240ms cubic-bezier(.4,0,.2,1);
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 480px) { .drawer { width: 400px; } }
+
+    .drawer.active { transform: translateX(0); }
+
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--color-border);
+      margin-top: 64px;
+      flex-shrink: 0;
+    }
+
+    .drawer-head h2 { font-size: 17px; font-weight: 700; }
+
+    .close-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.06);
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    [data-theme="light"] .close-btn { background: rgba(0,0,0,0.07); }
+    .close-btn:active { background: rgba(255,255,255,0.12); }
+
+    .cart-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.25rem;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .cart-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      color: var(--color-text-muted);
+      gap: 0.5rem;
+    }
+
+    .cart-empty-icon { font-size: 44px; }
+
+    .cart-item {
+      display: flex;
+      gap: 0.875rem;
+      padding: 0.875rem;
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
+      margin-bottom: 0.75rem;
+      border: 1px solid var(--color-border);
+    }
+
+    .cart-item-image {
+      width: 70px; height: 70px;
+      border-radius: var(--radius-md);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .cart-item-image img { width: 100%; height: 100%; object-fit: cover; }
+
+    .cart-item-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 0.15rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .cart-item-price {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .qty-btn {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(0,184,224,0.1);
+      color: var(--color-primary);
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .qty-btn:active { background: rgba(0,184,224,0.25); }
+
+    .qty-display {
+      width: 26px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .remove-btn {
+      color: var(--color-text-muted);
+      font-size: 11px;
+      margin-top: auto;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 2px 0;
+    }
+
+    .remove-btn:hover { color: #e53935; }
+
+    .drawer-footer {
+      border-top: 1px solid var(--color-border);
+      padding: 1rem 1.25rem 1.25rem;
+      background: var(--color-bg);
+      flex-shrink: 0;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-row.total {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      padding-top: 0.625rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .drawer-footer .btn { width: 100%; }
+
+    /* ── MODAL ── */
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--color-surface);
+      z-index: 1002;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease, transform 220ms ease;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      transform: translateY(24px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 600px) {
+      .modal {
+        top: 50%; left: 50%;
+        right: auto; bottom: auto;
+        transform: translate(-50%, -46%);
+        width: calc(100% - 2rem);
+        max-width: 520px;
+        max-height: 90dvh;
+        border-radius: var(--radius-xl);
+      }
+
+      .modal.active { transform: translate(-50%, -50%); }
+    }
+
+    .modal.active { opacity: 1; pointer-events: auto; }
+
+    .modal-inner { padding: 1.5rem; flex: 1; }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-head h2 { font-size: 19px; font-weight: 700; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 400px) { .form-row { grid-template-columns: 1fr; } }
+
+    .form-group { margin-bottom: 0.875rem; }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 11px 13px;
+      background: var(--color-input-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      color: var(--color-text);
+      transition: var(--transition);
+      min-height: 44px;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      padding-right: 36px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(0,184,224,0.13);
+    }
+
+    .payment-options { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+      background: var(--color-input-bg);
+    }
+
+    .payment-option:has(input:checked) {
+      border-color: var(--color-primary);
+      background: rgba(0,184,224,0.07);
+    }
+
+    .payment-option input[type="radio"] {
+      width: 17px; height: 17px;
+      min-height: 0;
+      accent-color: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    .payment-option-label { display: flex; flex-direction: column; }
+    .payment-option-label strong { font-size: 14px; font-weight: 600; }
+    .payment-option-label span { font-size: 12px; color: var(--color-text-muted); }
+
+    .order-summary {
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.125rem;
+      margin-bottom: 1.25rem;
+      font-size: 13px;
+      border: 1px solid var(--color-border);
+    }
+
+    .order-summary-title { font-weight: 700; margin-bottom: 0.5rem; font-size: 14px; }
+
+    .order-summary-item {
+      display: flex;
+      justify-content: space-between;
+      color: var(--color-text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .order-summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--color-primary);
+      color: #000;
+      padding: 0.875rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+      z-index: 3000;
+      transition: transform 280ms cubic-bezier(.22,.68,0,1.2);
+      pointer-events: none;
+      max-width: calc(100% - 2rem);
+      text-align: center;
+      font-size: 14px;
+      white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(0,184,224,0.4);
+    }
+
+    .toast.error {
+      background: #e53935;
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(229,57,53,0.4);
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 250ms ease;
+      padding: 1rem;
+      cursor: zoom-out;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 92dvh;
+      border-radius: var(--radius-lg);
+      object-fit: contain;
+      transform: scale(0.92);
+      transition: transform 280ms cubic-bezier(.22,.68,0,1.2);
+      box-shadow: 0 20px 80px rgba(0,0,0,0.8);
+      cursor: default;
+    }
+
+    .lightbox.active img {
+      transform: scale(1);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      transition: background 200ms ease;
+    }
+
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+    .cup-image-wrap { cursor: zoom-in; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 1rem;
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: 12px;
+      border-top: 1px solid var(--color-border);
+      margin-top: 1rem;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 380px) {
+      .navbar { padding: 0 1rem; }
+      .logo { font-size: 16px; }
+      .logo-icon { width: 32px; height: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <div class="logo-icon">T</div>
+    <span>TrackCups</span>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">☀️</button>
+    <button class="nav-btn" id="cartBtn" title="Shopping cart" aria-label="Open cart">
+      🛒
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-image">
+        <img src="1000028107.jpg" alt="Premium espresso cup" loading="lazy">
+      </div>
+      <div class="hero-text">
+        <div class="hero-eyebrow">Limited Edition · Motorsport Inspired</div>
+        <h1>Premium Track Edition Espresso Cups</h1>
+        <p>BMW-inspired ceramic cups crafted for true enthusiasts. Each edition tells the story of an icon.</p>
+        <button class="btn btn-primary" id="shopBtn">Shop Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUPS -->
+  <section class="section" id="products">
+    <div class="section-header">
+      <h2 class="section-title">Featured Cups</h2>
+      <p class="section-sub">5 limited editions — each one a tribute to a legend</p>
+    </div>
+    <div class="cups-list">
+
+      <!-- Max Verstappen -->
+      <div class="cup-item" data-id="max" data-name="Max Verstappen — Champion Edition" data-price="90">
+        <div class="cup-image-wrap">
+          <div class="cup-badge">Collector's</div>
+          <img src="caski/MAX.jpg" alt="Max Verstappen Champion Edition" loading="lazy" style="object-position: center 55%;">
+        </div>
+        <div class="cup-info">
+          <div class="cup-spec-line">RB19 · 1.6L V6 Hybrid · 4× World Champion</div>
+          <h3 class="cup-name">Max Verstappen — Champion Edition</h3>
+          <p class="cup-desc">Four consecutive Formula 1 World Championship titles. A record-breaking 2023 season that rewrote what was thought possible in the sport. Max Verstappen did not just win — he dominated with a cold, calculated precision that left the entire field helpless. From Spa to Suzuka, from pole position to fastest lap, the Dutchman turned every race into a masterclass in controlled aggression. This limited collector's edition pays tribute to the relentless machine behind the helmet: uncompromising in setup, ruthless under pressure, and impossible to stop once in clean air. Like Max himself — it makes no apologies.</p>
+          <div class="cup-footer">
+            <div class="cup-price">€34.99</div>
+            <div class="cup-actions">
+              <button class="btn btn-secondary add-to-cart-btn">Add to Cart</button>
+              <button class="btn btn-primary buy-now-btn">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BMW 440i F32 -->
+      <div class="cup-item" data-id="440i" data-name="BMW 440i — F32 Stage 2+" data-price="85">
+        <div class="cup-image-wrap">
+          <div class="cup-badge">Bestseller</div>
+          <img src="caski/M440I.jpg" alt="BMW 440i F32 Stage 2+" loading="lazy" style="object-position: center 72%;">
+        </div>
+        <div class="cup-info">
+          <div class="cup-spec-line">B58B30 Turbo · ZF 8HP Stage 3 · LSD · KW V3 · 500+ HP</div>
+          <h3 class="cup-name">BMW 440i — F32 Stage 2+</h3>
+          <p class="cup-desc">The BMW 440i F32 has become one of the most respected modern BMW performance platforms thanks to the legendary B58B30 turbocharged inline-six. Known for its closed-deck construction, massive tuning potential, and exceptional reliability under high power, the B58 is widely considered the modern successor to Toyota's legendary 2JZ — a reputation further reinforced after Toyota selected the same engine platform for the latest generation Supra. Equipped with a Stage 2+ setup, Stage 3 calibrated ZF 8HP transmission, LSD differential, upgraded cooling, and KW Variant 3 coilovers, this configuration delivers over 500 horsepower with explosive mid-range torque and extremely fast gear changes. The result is a serious M4-rivalling setup capable of outperforming standard modern M cars both on the street and on track.</p>
+          <div class="cup-footer">
+            <div class="cup-price">€39.99</div>
+            <div class="cup-actions">
+              <button class="btn btn-secondary add-to-cart-btn">Add to Cart</button>
+              <button class="btn btn-primary buy-now-btn">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BMW M4 GTS F82 -->
+      <div class="cup-item" data-id="m4gts" data-name="BMW M4 GTS — F82 Edition" data-price="80">
+        <div class="cup-image-wrap">
+          <div class="cup-badge">Limited</div>
+          <img src="caski/M4F82.jpg" alt="BMW M4 GTS F82 Edition" loading="lazy" style="object-position: center 78%;">
+        </div>
+        <div class="cup-info">
+          <div class="cup-spec-line">S55B30 Twin Turbo · DKG · Water Injection · 500 HP</div>
+          <h3 class="cup-name">BMW M4 GTS — F82 Edition</h3>
+          <p class="cup-desc">The BMW M4 GTS pushed the F82 platform to its absolute limit. Powered by the 3.0L S55B30 twin-turbocharged inline-six producing 500 horsepower, the GTS introduced BMW's factory water injection system — technology designed to lower intake temperatures and sustain maximum performance under extreme load. Paired with the lightning-fast 7-speed DKG transmission, adjustable coilover suspension, carbon fibre aero components, and significant weight reduction, the M4 GTS delivers brutal turbocharged performance with genuine track-focused capability.</p>
+          <div class="cup-footer">
+            <div class="cup-price">€39.99</div>
+            <div class="cup-actions">
+              <button class="btn btn-secondary add-to-cart-btn">Add to Cart</button>
+              <button class="btn btn-primary buy-now-btn">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BMW M3 GTS E92 -->
+      <div class="cup-item" data-id="m3gts" data-name="BMW M3 GTS — E92 Edition" data-price="75">
+        <div class="cup-image-wrap">
+          <div class="cup-badge">Limited</div>
+          <img src="caski/E92.jpg" alt="BMW M3 GTS E92 Edition" loading="lazy" style="object-position: center 52%;">
+        </div>
+        <div class="cup-info">
+          <div class="cup-spec-line">S65B44 V8 · DCT · 450 HP</div>
+          <h3 class="cup-name">BMW M3 GTS — E92 Edition</h3>
+          <p class="cup-desc">The E92 M3 GTS represents the absolute peak of BMW's naturally aspirated V8 era. Its 4.4L S65B44 high-revving V8 produces 450 horsepower with razor-sharp throttle response and one of the most iconic exhaust notes ever fitted to an M car. Combined with the rapid 7-speed DCT transmission, titanium exhaust system, track-focused suspension, and aggressive aerodynamic package, the GTS was developed as a true road-legal track machine produced in extremely limited numbers.</p>
+          <div class="cup-footer">
+            <div class="cup-price">€39.99</div>
+            <div class="cup-actions">
+              <button class="btn btn-secondary add-to-cart-btn">Add to Cart</button>
+              <button class="btn btn-primary buy-now-btn">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BMW M3 CSL E46 -->
+      <div class="cup-item" data-id="m3csl" data-name="BMW M3 CSL — E46 Edition" data-price="70">
+        <div class="cup-image-wrap">
+          <div class="cup-badge">Limited</div>
+          <img src="caski/M3E46.jpg" alt="BMW M3 CSL E46 Edition" loading="lazy" style="object-position: center 82%;">
+        </div>
+        <div class="cup-info">
+          <div class="cup-spec-line">S54B32 · SMG II · 360 HP</div>
+          <h3 class="cup-name">BMW M3 CSL — E46 Edition</h3>
+          <p class="cup-desc">The E46 M3 CSL is widely considered one of the greatest analogue BMW M cars ever built. Powered by the legendary 3.2L S54B32 naturally aspirated inline-six producing 360 horsepower, the CSL was engineered with aggressive weight reduction, sharper suspension tuning, and extensive carbon fibre components. Paired with BMW's SMG II gearbox — a race-inspired electro-hydraulic automated manual transmission capable of extremely fast shifts for its era — the CSL delivers a raw and mechanical driving experience that modern performance cars struggle to replicate.</p>
+          <div class="cup-footer">
+            <div class="cup-price">€39.99</div>
+            <div class="cup-actions">
+              <button class="btn btn-secondary add-to-cart-btn">Add to Cart</button>
+              <button class="btn btn-primary buy-now-btn">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 TrackCups. Premium espresso for automotive enthusiasts.</p>
+</footer>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- CART DRAWER -->
+<div class="drawer" id="drawer" role="dialog" aria-label="Shopping cart">
+  <div class="drawer-head">
+    <h2>Shopping Cart</h2>
+    <button class="close-btn" id="closeDrawer" aria-label="Close cart">✕</button>
+  </div>
+  <div class="cart-content" id="cartContent">
+    <div class="cart-empty">
+      <div class="cart-empty-icon">🛒</div>
+      <p>Your cart is empty</p>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <div class="summary-row total">
+      <span>Total</span>
+      <span id="total">€0.00</span>
+    </div>
+    <button class="btn btn-primary" id="checkoutBtn" disabled>Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal" id="modal" role="dialog" aria-label="Checkout">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h2>Complete Your Order</h2>
+      <button class="close-btn" id="closeModal" aria-label="Close checkout">✕</button>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="order-summary" id="orderSummary">
+      <div class="order-summary-title">Order Summary</div>
+      <div id="summaryItems"></div>
+      <div class="order-summary-total">
+        <span>Total</span>
+        <span id="summaryTotal">€0.00</span>
+      </div>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" placeholder="John" autocomplete="given-name">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" placeholder="Doe" autocomplete="family-name">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="john@example.com" autocomplete="email">
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="+389 70 000 000" autocomplete="tel">
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" id="address" placeholder="Street name and number" autocomplete="street-address">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" id="city" placeholder="Skopje" autocomplete="address-level2">
+      </div>
+      <div class="form-group">
+        <label for="country">Country</label>
+        <select id="country" autocomplete="country-name">
+          <option value="Macedonia">Macedonia</option>
+          <option value="Serbia">Serbia</option>
+          <option value="Croatia">Croatia</option>
+          <option value="Bosnia">Bosnia &amp; Herzegovina</option>
+          <option value="Slovenia">Slovenia</option>
+          <option value="Bulgaria">Bulgaria</option>
+          <option value="Albania">Albania</option>
+          <option value="Kosovo">Kosovo</option>
+          <option value="Montenegro">Montenegro</option>
+          <option value="Germany">Germany</option>
+          <option value="Austria">Austria</option>
+          <option value="Switzerland">Switzerland</option>
+          <option value="Italy">Italy</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="form-group">
+      <label>Payment Method</label>
+      <div class="payment-options">
+        <label class="payment-option">
+          <input type="radio" name="payment" value="crypto" checked>
+          <div class="payment-option-label">
+            <strong>Crypto Payment</strong>
+            <span>BTC, ETH, USDT — we'll send you wallet details</span>
+          </div>
+        </label>
+        <label class="payment-option">
+          <input type="radio" name="payment" value="paypal">
+          <div class="payment-option-label">
+            <strong>PayPal</strong>
+            <span>We'll send you a PayPal request</span>
+          </div>
+        </label>
+        <label class="payment-option">
+          <input type="radio" name="payment" value="bank_transfer">
+          <div class="payment-option-label">
+            <strong>Bank Transfer</strong>
+            <span>We'll send you bank account details</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" id="submitBtn" style="width: 100%; margin-top: 1.25rem; font-size: 15px;">
+      Place Order
+    </button>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="alert"></div>
+
+<script>
+  const ORDER_ENDPOINT = 'https://formspree.io/f/xkoezqap';
+
+  // ---- Data ----
+  const products = {
+    m3csl: { id: 'm3csl', name: 'BMW M3 CSL — E46 Edition',         price: 39.99, img: 'caski/M3E46.jpg' },
+    m3gts: { id: 'm3gts', name: 'BMW M3 GTS — E92 Edition',         price: 39.99, img: 'caski/E92.jpg'   },
+    m4gts: { id: 'm4gts', name: 'BMW M4 GTS — F82 Edition',         price: 39.99, img: 'caski/M4F82.jpg' },
+    '440i':{ id: '440i',  name: 'BMW 440i — F32 Stage 2+',          price: 39.99, img: 'caski/M440I.jpg' },
+    max:   { id: 'max',   name: 'Max Verstappen — Champion Edition', price: 34.99, img: 'caski/MAX.jpg'   }
+  };
+
+  let cart = [];
+
+  // ---- DOM ----
+  const cartBtn     = document.getElementById('cartBtn');
+  const overlay     = document.getElementById('overlay');
+  const drawer      = document.getElementById('drawer');
+  const modal       = document.getElementById('modal');
+  const cartBadge   = document.getElementById('cartBadge');
+  const cartContent = document.getElementById('cartContent');
+  const closeDrawer = document.getElementById('closeDrawer');
+  const closeModal  = document.getElementById('closeModal');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  const submitBtn   = document.getElementById('submitBtn');
+  const toast       = document.getElementById('toast');
+  const themeBtn    = document.getElementById('themeBtn');
+
+  // ---- Toast ----
+  let toastTimer;
+  function showToast(msg, isError = false) {
+    clearTimeout(toastTimer);
+    toast.textContent = msg;
+    toast.classList.toggle('error', isError);
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+  }
+
+  // ---- Price ----
+  function fmt(amount) {
+    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(amount);
+  }
+
+  function getTotal() {
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    return { total };
+  }
+
+  // ---- Cart Render ----
+  function renderCart() {
+    const { total } = getTotal();
+    cartBadge.textContent = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('total').textContent = fmt(total);
+
+    if (cart.length === 0) {
+      cartContent.innerHTML = `
+        <div class="cart-empty">
+          <div class="cart-empty-icon">🛒</div>
+          <p>Your cart is empty</p>
+        </div>`;
+      checkoutBtn.disabled = true;
+      return;
+    }
+
+    checkoutBtn.disabled = false;
+    cartContent.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-image">
+          <img src="${products[item.id].img}" alt="${item.name}" loading="lazy">
+        </div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">${fmt(item.price)} each</div>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="updateQty('${item.id}', -1)" aria-label="Decrease">−</button>
+            <div class="qty-display">${item.qty}</div>
+            <button class="qty-btn" onclick="updateQty('${item.id}', 1)" aria-label="Increase">+</button>
+          </div>
+          <button class="remove-btn" onclick="removeItem('${item.id}')">Remove</button>
+        </div>
+      </div>`).join('');
+  }
+
+  // ---- Cart Actions ----
+  function updateQty(id, delta) {
+    const item = cart.find(p => p.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(p => p.id !== id);
+    renderCart();
+  }
+
+  function removeItem(id) {
+    cart = cart.filter(p => p.id !== id);
+    renderCart();
+    showToast('Item removed');
+  }
+
+  function addToCart(id) {
+    const product = products[id];
+    if (!product) return;
+    const existing = cart.find(p => p.id === id);
+    if (existing) existing.qty++;
+    else cart.push({ ...product, qty: 1 });
+    renderCart();
+    showToast(`${product.name} added to cart`);
+  }
+
+  // ---- Drawer ----
+  function openDrawer() {
+    drawer.classList.add('active');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawerFn() {
+    drawer.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // ---- Modal ----
+  function updateOrderSummary() {
+    const { total } = getTotal();
+    document.getElementById('summaryItems').innerHTML = cart.map(i =>
+      `<div class="order-summary-item"><span>${i.name} × ${i.qty}</span><span>${fmt(i.price * i.qty)}</span></div>`
+    ).join('');
+    document.getElementById('summaryTotal').textContent = fmt(total);
+  }
+
+  function openModal() {
+    if (cart.length === 0) { showToast('Add items to cart first', true); return; }
+    updateOrderSummary();
+    closeDrawerFn();
+    modal.classList.add('active');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModalFn() {
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // ---- Event Listeners ----
+  cartBtn.addEventListener('click', openDrawer);
+  closeDrawer.addEventListener('click', closeDrawerFn);
+  checkoutBtn.addEventListener('click', openModal);
+  closeModal.addEventListener('click', closeModalFn);
+  overlay.addEventListener('click', () => { closeDrawerFn(); closeModalFn(); });
+
+  document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const id = e.currentTarget.closest('.cup-item').dataset.id;
+      addToCart(id);
+    });
+  });
+
+  document.querySelectorAll('.buy-now-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const id = e.currentTarget.closest('.cup-item').dataset.id;
+      addToCart(id);
+      setTimeout(openModal, 80);
+    });
+  });
+
+  // ---- Submit Order ----
+  submitBtn.addEventListener('click', async () => {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName  = document.getElementById('lastName').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const phone     = document.getElementById('phone').value.trim();
+    const address   = document.getElementById('address').value.trim();
+    const city      = document.getElementById('city').value.trim();
+    const country   = document.getElementById('country').value;
+    const payment   = document.querySelector('input[name="payment"]:checked').value;
+
+    if (!firstName || !lastName || !email || !phone || !address || !city) {
+      showToast('Please fill in all fields', true);
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast('Please enter a valid email', true);
+      return;
+    }
+
+    const paymentLabels = {
+      crypto: 'Crypto Payment (BTC/ETH/USDT)',
+      paypal: 'PayPal',
+      bank_transfer: 'Bank Transfer'
+    };
+
+    const { total } = getTotal();
+    const orderData = {
+      name: `${firstName} ${lastName}`,
+      email,
+      phone,
+      address: `${address}, ${city}, ${country}`,
+      payment_method: paymentLabels[payment],
+      items: cart.map(i => `${i.name} × ${i.qty} (${fmt(i.price * i.qty)})`).join(' | '),
+      total: fmt(total),
+      ordered_at: new Date().toLocaleString('en-GB')
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Placing order...';
+
+    if (!ORDER_ENDPOINT || ORDER_ENDPOINT === 'YOUR_FORMSPREE_ENDPOINT') {
+      console.log('ORDER (set ORDER_ENDPOINT to enable sending):', orderData);
+      await new Promise(r => setTimeout(r, 600));
+      finishOrder();
+      return;
+    }
+
+    try {
+      const res = await fetch(ORDER_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(orderData)
+      });
+      if (!res.ok) throw new Error('Network error');
+      finishOrder();
+    } catch {
+      showToast('Could not send order. Please try again.', true);
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Place Order';
+    }
+  });
+
+  function finishOrder() {
+    closeModalFn();
+    cart = [];
+    renderCart();
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Place Order';
+    showToast('Order placed! We will contact you soon.');
+    ['firstName','lastName','email','phone','address','city'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.querySelector('input[name="payment"][value="crypto"]').checked = true;
+  }
+
+  // ---- Theme Toggle ----
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let isDark = prefersDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  themeBtn.textContent = isDark ? '☀️' : '🌙';
+
+  themeBtn.addEventListener('click', () => {
+    isDark = !isDark;
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    themeBtn.textContent = isDark ? '☀️' : '🌙';
+  });
+
+  // ---- Shop Button ----
+  document.getElementById('shopBtn').addEventListener('click', () => {
+    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // ---- Lightbox ----
+  const lightbox      = document.getElementById('lightbox');
+  const lightboxImg   = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.cup-image-wrap').forEach(wrap => {
+    wrap.addEventListener('click', () => {
+      const img = wrap.querySelector('img');
+      openLightbox(img.src, img.alt);
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // ---- Init ----
+  renderCart();
+</script>
+</body>
+</html>
