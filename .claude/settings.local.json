@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(ls \"C:\\\\Users\\\\DAVIDOVSKI\\\\WebstormProjects\\\\untitled2\\\\\" && echo \"---\" && ls \"C:\\\\Users\\\\DAVIDOVSKI\\\\WebstormProjects\\\\untitled2\\\\caski\\\\\")"
     ]
   }
 }

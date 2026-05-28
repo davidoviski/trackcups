@@ -251,7 +251,7 @@
     .hero-image img {
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center 60%;
+      object-position: left 45%;
     }
 
     .hero-eyebrow {
@@ -371,7 +371,7 @@
 
     @media (min-width: 1024px) {
       .section-header { max-width: 960px; padding: 0 2rem 2.5rem; }
-      .cups-list { max-width: 960px; padding: 0 2rem; gap: 2.5rem; }
+      .cups-list { max-width: 960px; padding: 0 2rem; gap: 2rem; }
     }
 
     /* ── CUP CARD ── */
@@ -453,6 +453,57 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       backdrop-filter: blur(6px);
+    }
+
+    .cup-badge--gold {
+      background: linear-gradient(135deg, rgba(201,162,39,0.9), rgba(232,196,80,0.9));
+      color: #1a1200;
+      border-color: rgba(255,220,80,0.6);
+    }
+
+    /* ── LIFESTYLE BANNER ── */
+    .lifestyle-banner {
+      width: 100%;
+      height: 340px;
+      position: relative;
+      overflow: hidden;
+      margin: 0 0 0.5rem;
+    }
+
+    .lifestyle-banner img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 75%;
+    }
+
+    .lifestyle-banner-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0.5) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .lifestyle-banner-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+    }
+
+    .lifestyle-banner-title {
+      font-size: clamp(22px, 5vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      text-align: center;
+    }
+
+    @media (min-width: 1024px) {
+      .lifestyle-banner { height: 480px; }
     }
 
     .cup-info {
@@ -975,7 +1026,7 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-image">
-        <img src="1000028107.jpg" alt="Premium espresso cup" loading="lazy">
+        <img src="trackcups%20shop/Main%20Mercedes.jpg" alt="Premium espresso cup" loading="lazy">
       </div>
       <div class="hero-text">
         <div class="hero-eyebrow">Limited Edition · Motorsport Inspired</div>
@@ -986,6 +1037,15 @@
     </div>
   </section>
 
+  <!-- LIFESTYLE BANNER -->
+  <div class="lifestyle-banner">
+    <img src="trackcups%20shop/vtora%20main.jpg" alt="TrackCups lifestyle" loading="lazy">
+    <div class="lifestyle-banner-overlay">
+      <div class="lifestyle-banner-label">Crafted for enthusiasts</div>
+      <div class="lifestyle-banner-title">Where Coffee Meets the Track</div>
+    </div>
+  </div>
+
   <!-- CUPS -->
   <section class="section" id="products">
     <div class="section-header">
@@ -994,18 +1054,18 @@
     </div>
     <div class="cups-list">
 
-      <!-- Max Verstappen -->
-      <div class="cup-item" data-id="max" data-name="Max Verstappen — Champion Edition" data-price="90">
+      <!-- BMW 440i F32 -->
+      <div class="cup-item" data-id="440i" data-name="BMW 440i — F32 Stage 2+" data-price="85">
         <div class="cup-image-wrap">
-          <div class="cup-badge">Collector's</div>
-          <img src="caski/MAX.jpg" alt="Max Verstappen Champion Edition" loading="lazy" style="object-position: center 55%;">
+          <div class="cup-badge cup-badge--gold">Premium</div>
+          <img src="trackcups%20shop/440i.jpg" alt="BMW 440i F32 Stage 2+" loading="lazy" style="object-position: center 58%;">
         </div>
         <div class="cup-info">
-          <div class="cup-spec-line">RB19 · 1.6L V6 Hybrid · 4× World Champion</div>
-          <h3 class="cup-name">Max Verstappen — Champion Edition</h3>
-          <p class="cup-desc">Four consecutive Formula 1 World Championship titles. A record-breaking 2023 season that rewrote what was thought possible in the sport. Max Verstappen did not just win — he dominated with a cold, calculated precision that left the entire field helpless. From Spa to Suzuka, from pole position to fastest lap, the Dutchman turned every race into a masterclass in controlled aggression. This limited collector's edition pays tribute to the relentless machine behind the helmet: uncompromising in setup, ruthless under pressure, and impossible to stop once in clean air. Like Max himself — it makes no apologies.</p>
+          <div class="cup-spec-line">B58B30 · Stage 2+ Downpipe · Hybrid Turbo · ZF 8HP XHP Stage 3 · Drexler LSD · KW V3</div>
+          <h3 class="cup-name">BMW 440i — F32 Stage 2+</h3>
+          <p class="cup-desc">The BMW 440i F32 has become one of the most respected modern BMW performance platforms thanks to the legendary B58B30 turbocharged inline-six. Known for its closed-deck construction, massive tuning potential, and exceptional reliability under high power, the B58 is widely considered the modern successor to Toyota's legendary 2JZ — a reputation further reinforced after Toyota selected the same engine platform for the latest generation Supra. Equipped with a Stage 2+ Downpipe and Hybrid Turbo setup, ZF-8HP XHP Stage 3 transmission, Drexler LSD differential, upgraded cooling, KW Variant 3 suspension and F82 brakes, this configuration delivers over 500 horsepower with explosive mid-range torque and extremely fast gear changes. The result is a serious M4 Killer setup, capable of outperforming standard modern M cars both on the street and on track.</p>
           <div class="cup-footer">
-            <div class="cup-price">€34.99</div>
+            <div class="cup-price">€39.99</div>
             <div class="cup-actions">
               <button class="btn btn-secondary add-to-cart-btn">Add to Cart</button>
               <button class="btn btn-primary buy-now-btn">Buy Now</button>
@@ -1014,16 +1074,15 @@
         </div>
       </div>
 
-      <!-- BMW 440i F32 -->
-      <div class="cup-item" data-id="440i" data-name="BMW 440i — F32 Stage 2+" data-price="85">
+      <!-- BMW M3 CSL E46 -->
+      <div class="cup-item" data-id="m3csl" data-name="BMW M3 CSL — E46 Edition" data-price="70">
         <div class="cup-image-wrap">
-          <div class="cup-badge">Bestseller</div>
-          <img src="caski/M440I.jpg" alt="BMW 440i F32 Stage 2+" loading="lazy" style="object-position: center 72%;">
+          <img src="trackcups%20shop/E46.png" alt="BMW M3 CSL E46 Edition" loading="lazy" style="object-position: center 65%;">
         </div>
         <div class="cup-info">
-          <div class="cup-spec-line">B58B30 Turbo · ZF 8HP Stage 3 · LSD · KW V3 · 500+ HP</div>
-          <h3 class="cup-name">BMW 440i — F32 Stage 2+</h3>
-          <p class="cup-desc">The BMW 440i F32 has become one of the most respected modern BMW performance platforms thanks to the legendary B58B30 turbocharged inline-six. Known for its closed-deck construction, massive tuning potential, and exceptional reliability under high power, the B58 is widely considered the modern successor to Toyota's legendary 2JZ — a reputation further reinforced after Toyota selected the same engine platform for the latest generation Supra. Equipped with a Stage 2+ setup, Stage 3 calibrated ZF 8HP transmission, LSD differential, upgraded cooling, and KW Variant 3 coilovers, this configuration delivers over 500 horsepower with explosive mid-range torque and extremely fast gear changes. The result is a serious M4-rivalling setup capable of outperforming standard modern M cars both on the street and on track.</p>
+          <div class="cup-spec-line">S54B32 · SMG II · 360 HP</div>
+          <h3 class="cup-name">BMW M3 CSL — E46 Edition</h3>
+          <p class="cup-desc">The E46 M3 CSL is widely considered one of the greatest analogue BMW M cars ever built. Powered by the legendary 3.2L S54B32 naturally aspirated inline-six producing 360 horsepower, the CSL was engineered with aggressive weight reduction, sharper suspension tuning, and extensive carbon fibre components. Paired with BMW's SMG II gearbox — a race-inspired electro-hydraulic automated manual transmission capable of extremely fast shifts for its era — the CSL delivers a raw and mechanical driving experience that modern performance cars struggle to replicate.</p>
           <div class="cup-footer">
             <div class="cup-price">€39.99</div>
             <div class="cup-actions">
@@ -1037,8 +1096,8 @@
       <!-- BMW M4 GTS F82 -->
       <div class="cup-item" data-id="m4gts" data-name="BMW M4 GTS — F82 Edition" data-price="80">
         <div class="cup-image-wrap">
-          <div class="cup-badge">Limited</div>
-          <img src="caski/M4F82.jpg" alt="BMW M4 GTS F82 Edition" loading="lazy" style="object-position: center 78%;">
+          <div class="cup-badge cup-badge--gold">Premium</div>
+          <img src="trackcups%20shop/m4.jpg" alt="BMW M4 GTS F82 Edition" loading="lazy" style="object-position: center 58%;">
         </div>
         <div class="cup-info">
           <div class="cup-spec-line">S55B30 Twin Turbo · DKG · Water Injection · 500 HP</div>
@@ -1057,8 +1116,7 @@
       <!-- BMW M3 GTS E92 -->
       <div class="cup-item" data-id="m3gts" data-name="BMW M3 GTS — E92 Edition" data-price="75">
         <div class="cup-image-wrap">
-          <div class="cup-badge">Limited</div>
-          <img src="caski/E92.jpg" alt="BMW M3 GTS E92 Edition" loading="lazy" style="object-position: center 52%;">
+          <img src="trackcups%20shop/E9222.JPG" alt="BMW M3 GTS E92 Edition" loading="lazy" style="object-position: center 52%;">
         </div>
         <div class="cup-info">
           <div class="cup-spec-line">S65B44 V8 · DCT · 450 HP</div>
@@ -1074,18 +1132,18 @@
         </div>
       </div>
 
-      <!-- BMW M3 CSL E46 -->
-      <div class="cup-item" data-id="m3csl" data-name="BMW M3 CSL — E46 Edition" data-price="70">
+      <!-- Champion Edition -->
+      <div class="cup-item" data-id="max" data-name="Champion Edition — MAX RPM" data-price="90">
         <div class="cup-image-wrap">
-          <div class="cup-badge">Limited</div>
-          <img src="caski/M3E46.jpg" alt="BMW M3 CSL E46 Edition" loading="lazy" style="object-position: center 82%;">
+          <div class="cup-badge">Limited Quantity</div>
+          <img src="trackcups%20shop/max v.jpg" alt="Champion Edition MAX RPM" loading="lazy" style="object-position: center 45%;">
         </div>
         <div class="cup-info">
-          <div class="cup-spec-line">S54B32 · SMG II · 360 HP</div>
-          <h3 class="cup-name">BMW M3 CSL — E46 Edition</h3>
-          <p class="cup-desc">The E46 M3 CSL is widely considered one of the greatest analogue BMW M cars ever built. Powered by the legendary 3.2L S54B32 naturally aspirated inline-six producing 360 horsepower, the CSL was engineered with aggressive weight reduction, sharper suspension tuning, and extensive carbon fibre components. Paired with BMW's SMG II gearbox — a race-inspired electro-hydraulic automated manual transmission capable of extremely fast shifts for its era — the CSL delivers a raw and mechanical driving experience that modern performance cars struggle to replicate.</p>
+          <div class="cup-spec-line">RB19 · 1.6L V6 Hybrid · 4× World Champion</div>
+          <h3 class="cup-name">Champion Edition — MAX RPM</h3>
+          <p class="cup-desc">We won't say the name. The four letters on the cup do it for us. Inspired by the most dominant racing mind of a generation — cold under pressure, ruthless in traffic, and impossible to catch once in clean air. Four World Championship titles. A 2023 season that redefined what dominance looks like. From pole to chequered flag, race after race, with a precision that left the entire grid two seconds behind. Du Du Du Du. This cup is for the ones who already know. One more lap. One more espresso.</p>
           <div class="cup-footer">
-            <div class="cup-price">€39.99</div>
+            <div class="cup-price">€34.99</div>
             <div class="cup-actions">
               <button class="btn btn-secondary add-to-cart-btn">Add to Cart</button>
               <button class="btn btn-primary buy-now-btn">Buy Now</button>
